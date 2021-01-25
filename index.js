@@ -14,10 +14,11 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  socket.on('send', (message, user) => {
-    console.log(`message "${message} -> "${user}" `);
-    io.to(user).emit('message', { user: user, msg: message });
-    console.log(`message emited`);
+
+  socket.join(1);
+
+  socket.on('send', (msg, user) => {
+    io.to(1).emit('message', { user: user, message: msg });
   });
 });
 
