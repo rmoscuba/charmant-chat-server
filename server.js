@@ -2,12 +2,12 @@ const app = require('express')();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http, {
     cors: {
-      origin: "http://localhost:3000",
+      origin: !process.env.PORT ? "http://localhost:3000" : "https://charmant-chat.rmoscuba.vercel.app",
       methods: ["GET", "POST"]
     }
   });
 
-const port = 4000
+const port = process.env.PORT || 4000
 
 app.get('/', (req, res) => {
   res.send('<h1>Hello world</h1>');
